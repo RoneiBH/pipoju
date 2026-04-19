@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautyKit Store | Loja Pipoju</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #d81b60;
+            --primary-dark: #ad1457;
+            --secondary: #fce4ec;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --bg-light: #fffafb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 15px 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: var(--text-dark); text-decoration: none; }
+        .logo span { color: var(--primary); }
+
+        nav ul { display: flex; list-style: none; align-items: center; }
+        nav ul li { margin-left: 25px; }
+        nav ul li a { text-decoration: none; color: var(--text-dark); font-weight: 500; }
+
+        .btn-contato-nav {
+            background: var(--primary);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        /* Menu Hamburger Mobile */
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .menu-toggle span { display: block; width: 25px; height: 3px; background-color: var(--primary); border-radius: 3px; }
+
+        /* --- SEÇÃO HERO COM A SUA IMAGEM --- */
+        .hero {
+            height: 99vh;
+            /* Certifique-se de que a imagem banner-pipoju.jpg está na mesma pasta do HTML */
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), 
+                        url('/img/banner-pipoju.jpg.png'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .hero-content h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 10px; 
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.6); 
+        }
+
+        .hero-content p { 
+            font-size: 1.3rem; 
+            margin-bottom: 30px; 
+            max-width: 800px; 
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 8px rgba(0,0,0,0.7); 
+        }
+
+        .btn-main {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 16px 45px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-main:hover { background: var(--primary-dark); transform: scale(1.05); }
+
+        /* --- CARDS DOS KITS --- */
+        .container { max-width: 1150px; margin: 0 auto; padding: 60px 20px; }
+        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 50px; color: var(--primary-dark); }
+        
+        .products-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 35px; 
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+            transition: 0.3s;
+        }
+
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
+
+        .product-img-wrapper { width: 100%; height: 260px; position: relative; }
+        .product-img { width: 100%; height: 100%; object-fit: cover; }
+
+        .product-badge {
+            position: absolute;
+            top: 15px; left: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .product-info { padding: 25px; }
+        .product-info h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .price { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
+
+        .btn-buy {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            nav { position: absolute; top: 70px; right: -100%; background: var(--white); width: 100%; transition: 0.5s; z-index: 999; }
+            nav.active { right: 0; }
+            nav ul { flex-direction: column; padding: 30px; gap: 20px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero { height: 60vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container-header">
+            <a href="#" class="logo">Loja de maquiagem <span>Pipoju</span></a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span><span></span><span></span>
+            </div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#marcas">Marcas</a></li>
+                    <li><a href="#kits">Kits</a></li>
+                    <li><a href="#" class="btn-contato-nav">WhatsApp</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Loja de maquiagem kits pipoju</h1>
+            <p>A melhor seleção de kits da Natura, O Boticário e Eudora para realçar a sua beleza.</p>
+            <a href="#kits" class="btn-main">Conhecer os Kits</a>
+        </div>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title" id="kits">Kits Prontos para Entrega</h2>
+        <div class="products-grid">
+            
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <div class="product-badge">NATURA</div>
+                    <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=500" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3>Kit Una Completo</h3>
+                    <p>Contém: 1 Batom Matte, 1 Máscara de Cílios e 1 Blush Aquarela.</p>
+                    <div class="price">R$ 149,90</div>
+                    <a href="#" class="btn-buy">Comprar via WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <div class="product-badge">O BOTICÁRIO</div>
+                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=500" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3>Combo Make B. Glamour</h3>
+                    <p>Contém: 1 Paleta de Sombras, 1 Delineador e 1 Necessaire Luxo.</p>
+                    <div class="price">R$ 189,00</div>
+                    <a href="#" class="btn-buy">Comprar via WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <div class="product-badge">EUDORA</div>
+                    <img src="https://images.unsplash.com/photo-1515688594390-b649af70d282?q=80&w=500" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3>Linha Niina Secrets</h3>
+                    <p>Contém: 1 Base Hydra Glow e 1 Esponja de Maquiagem Especial.</p>
+                    <div class="price">R$ 125,50</div>
+                    <a href="#" class="btn-buy">Comprar via WhatsApp</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
