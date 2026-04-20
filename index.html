@@ -3,248 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poliana Store | Loja Pipoju</title>
-    
+    <title>BeautyKit Store | Loja Pipoju</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --primary: #d81b60;
             --primary-dark: #ad1457;
-            --secondary: #fce4ec;
-            --text-dark: #333;
-            --text-light: #666;
             --white: #ffffff;
             --bg-light: #fffafb;
+            --text-dark: #333;
+            --text-light: #666;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
-
-        /* Header */
-        header {
-            background: var(--white);
-            padding: 15px 5%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .container-header {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo { font-size: 24px; font-weight: 700; color: var(--text-dark); text-decoration: none; }
+        
+        header { background: var(--white); padding: 15px 5%; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .container-header { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 700; text-decoration: none; color: var(--text-dark); }
         .logo span { color: var(--primary); }
 
-        nav ul { display: flex; list-style: none; align-items: center; }
-        nav ul li { margin-left: 25px; }
-        nav ul li a { text-decoration: none; color: var(--text-dark); font-weight: 500; }
+        /* Menu Horizontal Desktop */
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul li a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.9rem; }
 
-        .btn-contato-nav {
-            background: var(--primary);
-            color: white !important;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.9rem;
+        .hero { 
+            height: 70vh; 
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('img/banner-pipoju.jpg'); 
+            background-size: cover; background-position: center; 
+            display: flex; justify-content: center; align-items: center; text-align: center; color: #fff;
         }
+        .hero-content h1 { font-size: 3.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
 
-        /* Menu Hamburger Mobile */
-        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
-        .menu-toggle span { display: block; width: 25px; height: 3px; background-color: var(--primary); border-radius: 3px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .brand-section { margin-bottom: 60px; }
+        .section-title { text-align: center; font-size: 2rem; margin-bottom: 30px; color: var(--primary-dark); position: relative; padding-bottom: 10px; }
+        .section-title::after { content: ''; width: 50px; height: 3px; background: var(--primary); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
 
-        /* --- SEÇÃO HERO COM A SUA IMAGEM --- */
-        .hero {
-            height: 99vh;
-            /* Certifique-se de que a imagem banner-pipoju.jpg está na mesma pasta do HTML */
-            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), 
-                        url('img/banner-pipoju.jpg.png'); 
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-            padding: 0 20px;
-        }
-
-        .hero-content h1 { 
-            font-size: 3.5rem; 
-            margin-bottom: 10px; 
-            text-shadow: 2px 2px 15px rgba(0,0,0,0.6); 
-        }
-
-        .hero-content p { 
-            font-size: 1.3rem; 
-            margin-bottom: 30px; 
-            max-width: 800px; 
-            margin-left: auto;
-            margin-right: auto;
-            text-shadow: 1px 1px 8px rgba(0,0,0,0.7); 
-        }
-
-        .btn-main {
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            padding: 16px 45px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: 0.3s;
-            display: inline-block;
-        }
-
-        .btn-main:hover { background: var(--primary-dark); transform: scale(1.05); }
-
-        /* --- CARDS DOS KITS --- */
-        .container { max-width: 1150px; margin: 0 auto; padding: 60px 20px; }
-        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 50px; color: var(--primary-dark); }
-        
+        /* Grid fixa de 4 colunas */
         .products-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 35px; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px; 
         }
 
-        .product-card {
-            background: var(--white);
-            border-radius: 18px;
-            overflow: hidden;
-            border: 1px solid #eee;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
-            transition: 0.3s;
-        }
-
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
-
-        .product-img-wrapper { width: 100%; height: 260px; position: relative; }
+        .product-card { background: #fff; border-radius: 15px; overflow: hidden; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: 0.3s; }
+        .product-card:hover { transform: translateY(-5px); }
+        
+        .img-container { width: 100%; height: 230px; position: relative; background: #f0f0f0; }
         .product-img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .badge { position: absolute; top: 10px; left: 10px; background: var(--primary); color: #fff; padding: 4px 12px; border-radius: 5px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+        
+        .info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .info h3 { font-size: 1.1rem; margin-bottom: 5px; color: #333; }
+        .info p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px; flex-grow: 1; }
+        .price { font-size: 1.4rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 15px; }
+        
+        .btn-buy { width: 100%; padding: 12px; background: var(--primary); color: #fff; text-decoration: none; display: block; text-align: center; border-radius: 8px; font-weight: 600; transition: 0.3s; }
 
-        .product-badge {
-            position: absolute;
-            top: 15px; left: 15px;
-            background: var(--primary);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 11px; font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .product-info { padding: 25px; }
-        .product-info h3 { font-size: 1.3rem; margin-bottom: 10px; }
-        .price { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; }
-
-        .btn-buy {
-            width: 100%;
-            padding: 15px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .menu-toggle { display: flex; }
-            nav { position: absolute; top: 70px; right: -100%; background: var(--white); width: 100%; transition: 0.5s; z-index: 999; }
-            nav.active { right: 0; }
-            nav ul { flex-direction: column; padding: 30px; gap: 20px; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero { height: 60vh; }
-        }
+        @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .products-grid { grid-template-columns: 1fr; } nav { display: none; } }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container-header">
-            <a href="#" class="logo">Loja de maquiagem <span>Pipoju</span></a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span></span><span></span><span></span>
-            </div>
-            <nav id="nav-menu">
-                <ul>
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#marcas">Marcas</a></li>
-                    <li><a href="#kits">Kits</a></li>
-                    <li><a href="#" class="btn-contato-nav">WhatsApp</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<header>
+    <div class="container-header">
+        <a href="#" class="logo">Pipoju <span>Beauty</span></a>
+        <nav>
+            <ul>
+                <li><a href="#natura">Natura</a></li>
+                <li><a href="#boticario">Boticário</a></li>
+                <li><a href="#eudora">Eudora</a></li>
+                <li><a href="#chocolates">Chocolates</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="btn-buy" style="width: auto; padding: 8px 20px;">WhatsApp</a>
+    </div>
+</header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Loja de maquiagem kits pipoju</h1>
-            <p>A melhor seleção de kits da Natura, O Boticário e Eudora para realçar a sua beleza.</p>
-            <a href="#kits" class="btn-main">Conhecer os Kits</a>
+<section class="hero">
+    <div class="hero-content">
+        <h1>Loja de maquiagem kits pipoju</h1>
+        <p>Realçando sua beleza com os melhores kits</p>
+    </div>
+</section>
+
+<main class="container">
+    
+    <section class="brand-section" id="natura">
+        <h2 class="section-title">Kits Natura</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="img-container"><span class="badge">NATURA</span><img src="https://images.pexels.com/photos/3373739/pexels-photo-3373739.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Una Completo</h3><p>Batom + Máscara + Blush.</p><div class="price">R$ 149,90</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><span class="badge">NATURA</span><img src="https://images.pexels.com/photos/3785121/pexels-photo-3785121.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Ekos Castanha</h3><p>Polpa mãos + Frescor.</p><div class="price">R$ 115,00</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><span class="badge">NATURA</span><img src="https://images.pexels.com/photos/4465124/pexels-photo-4465124.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Todo Dia</h3><p>Creme + Sabonetes.</p><div class="price">R$ 89,90</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><span class="badge">NATURA</span><img src="https://images.pexels.com/photos/3985338/pexels-photo-3985338.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Homem Sagaz</h3><p>Perfume + Shampoo.</p><div class="price">R$ 160,00</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
         </div>
     </section>
 
-    <main class="container">
-        <h2 class="section-title" id="kits">Kits Prontos para Entrega</h2>
+    <section class="brand-section" id="boticario">
+        <h2 class="section-title">Kits O Boticário</h2>
         <div class="products-grid">
-            
             <div class="product-card">
-                <div class="product-img-wrapper">
-                    <div class="product-badge">NATURA</div>
-                    <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=500" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3>Kit Una Completo</h3>
-                    <p>Contém: 1 Batom Matte, 1 Máscara de Cílios e 1 Blush Aquarela.</p>
-                    <div class="price">R$ 149,90</div>
-                    <a href="#" class="btn-buy">Comprar via WhatsApp</a>
-                </div>
+                <div class="img-container"><span class="badge">BOTICÁRIO</span><img src="https://images.pexels.com/photos/2533266/pexels-photo-2533266.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Make B. Glam</h3><p>Base + Batom Líquido.</p><div class="price">R$ 189,00</div><a href="#" class="btn-buy">Comprar</a></div>
             </div>
-
             <div class="product-card">
-                <div class="product-img-wrapper">
-                    <div class="product-badge">O BOTICÁRIO</div>
-                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=500" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3>Combo Make B. Glamour</h3>
-                    <p>Contém: 1 Paleta de Sombras, 1 Delineador e 1 Necessaire Luxo.</p>
-                    <div class="price">R$ 189,00</div>
-                    <a href="#" class="btn-buy">Comprar via WhatsApp</a>
-                </div>
+                <div class="img-container"><span class="badge">BOTICÁRIO</span><img src="https://images.pexels.com/photos/4620843/pexels-photo-4620843.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Lily Luxo</h3><p>Creme Acetinado + Perfume.</p><div class="price">R$ 250,00</div><a href="#" class="btn-buy">Comprar</a></div>
             </div>
-
             <div class="product-card">
-                <div class="product-img-wrapper">
-                    <div class="product-badge">EUDORA</div>
-                    <img src="https://images.unsplash.com/photo-1515688594390-b649af70d282?q=80&w=500" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3>Linha Niina Secrets</h3>
-                    <p>Contém: 1 Base Hydra Glow e 1 Esponja de Maquiagem Especial.</p>
-                    <div class="price">R$ 125,50</div>
-                    <a href="#" class="btn-buy">Comprar via WhatsApp</a>
-                </div>
+                <div class="img-container"><span class="badge">BOTICÁRIO</span><img src="https://images.pexels.com/photos/8140915/pexels-photo-8140915.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Intense</h3><p>Paleta + Brilho Labial.</p><div class="price">R$ 95,00</div><a href="#" class="btn-buy">Comprar</a></div>
             </div>
-
+            <div class="product-card">
+                <div class="img-container"><span class="badge">BOTICÁRIO</span><img src="https://images.pexels.com/photos/6663563/pexels-photo-6663563.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Coffee Duo</h3><p>Colônia + Loção.</p><div class="price">R$ 175,00</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <script>
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
-        mobileMenu.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    </script>
+    <section class="brand-section" id="eudora">
+        <h2 class="section-title">Kits Eudora</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="img-container"><span class="badge">EUDORA</span><img src="https://images.pexels.com/photos/3018845/pexels-photo-3018845.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Niina Secrets</h3><p>Base Hydra + Esponja.</p><div class="price">R$ 125,50</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><span class="badge">EUDORA</span><img src="https://images.pexels.com/photos/2688991/pexels-photo-2688991.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Soul Trio</h3><p>3 cores de Batons Soul.</p><div class="price">R$ 89,90</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><span class="badge">EUDORA</span><img src="https://images.pexels.com/photos/3736444/pexels-photo-3736444.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Glam Noite</h3><p>Delineador + Máscara.</p><div class="price">R$ 110,00</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><span class="badge">EUDORA</span><img src="https://images.pexels.com/photos/3736453/pexels-photo-3736453.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Kit Instance</h3><p>Creme de Mãos + Sabonete.</p><div class="price">R$ 55,00</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="brand-section" id="chocolates">
+        <h2 class="section-title">Cacau Show</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="img-container"><span class="badge">CACAU SHOW</span><img src="https://images.pexels.com/photos/65882/chocolate-dark-coffee-confectionery-65882.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Cesta Gourmet</h3><p>Trufas e Bombons Sortidos.</p><div class="price">R$ 98,00</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><span class="badge">CACAU SHOW</span><img src="https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Caixa Angel</h3><p>Bombons Finos Coração.</p><div class="price">R$ 65,00</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><span class="badge">CACAU SHOW</span><img src="https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Mix Tabletes</h3><p>LaCreme e Tabletes.</p><div class="price">R$ 42,00</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+            <div class="product-card">
+                <div class="img-container"><span class="badge">CACAU SHOW</span><img src="https://images.pexels.com/photos/4114827/pexels-photo-4114827.jpeg?auto=compress&cs=tinysrgb&w=400" class="product-img"></div>
+                <div class="info"><h3>Pote Drageados</h3><p>Frutas com Chocolate.</p><div class="price">R$ 35,00</div><a href="#" class="btn-buy">Comprar</a></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div style="text-align: center; padding: 20px; color: var(--text-light);">
+        &copy; 2026 Pipoju Beauty. Todos os direitos reservados.
+    </div>
+</footer>
+
 </body>
 </html>
